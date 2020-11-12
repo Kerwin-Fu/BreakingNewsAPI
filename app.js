@@ -50,3 +50,6 @@ app.use('/api',userRouter)
 app.listen(3070,()=> {
     console.log('https://127.0.0.1:3070');
 })
+
+
+
