@@ -4,6 +4,8 @@ const db = require('../db/index')
 // 导入生成 Token 的包
 const jwt = require('jsonwebtoken')
 
+const config = require('../config')
+
 //注册功能
 exports. regUser = (req, res) => {
     const userInfo = req.body
