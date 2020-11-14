@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-12 16:28:57
- * @LastEditTime: 2020-11-12 18:50:44
+ * @LastEditTime: 2020-11-14 10:38:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \BreakingNewsAPI\app.js
@@ -40,11 +40,32 @@ const cors = require('cors')
 app.use(cors())
 //设置数据解码
 app.use(express.urlencoded({ extended:false }))
+
+//错误中间件需要的模块
+const joi = require('@hapi/joi')
+
+app.use((req, res, next) => {
+    res.cc= (err,status = 1)=> {
+        res.send({
+            status,
+            message: err instanceof Error ? err.message : err
+        })
+    }
+    next()
+})
+
 //引入用户路由模块
 const userRouter = require('./router/user')
-
 app.use('/api',userRouter)
 
+
+// 错误中间件
+app.use(function (err, req, res, next) {
+    // 数据验证失败
+    if (err instanceof joi.ValidationError) return res.cc(err)
+    // 未知错误
+    res.cc(err)
+  })
 
 
 app.listen(3070,()=> {
