@@ -1,0 +1,32 @@
+/*
+ * @Author: your name
+ * @Date: 2020-11-15 11:16:54
+ * @LastEditTime: 2020-11-15 14:41:25
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \BreakingNewsAPI\schema\artcate.js
+ */
+// 导入定义验证规则的模块
+const joi = require('@hapi/joi')
+
+// 定义 分类名称 和 分类别名 的校验规则
+const name = joi.string().required()
+const alias = joi.string().alphanum().required()
+
+// 定义 分类Id 的校验规则
+const id = joi.number().integer().min(1).required()
+
+// 校验规则对象 - 添加分类
+exports.add_cate_schema = {
+  body: {
+    name,
+    alias,
+  },
+}
+
+// 校验规则对象 - 删除分类
+exports.delete_cate_schema = {
+  params: {
+    id,
+  },
+}
