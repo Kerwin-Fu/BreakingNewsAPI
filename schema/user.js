@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-14 10:29:56
- * @LastEditTime: 2020-11-14 16:13:37
+ * @LastEditTime: 2020-11-15 09:34:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \BreakingNewsAPI\schema\user.js
@@ -48,5 +48,16 @@ exports.update_password_schema = {
     // 2. joi.not(joi.ref('oldPwd')) 表示 newPwd 的值不能等于 oldPwd 的值
     // 3. .concat() 用于合并 joi.not(joi.ref('oldPwd')) 和 password 这两条验证规则
     newPwd: joi.not(joi.ref('oldPwd')).concat(password),
+  },
+}
+
+// dataUri() 指的是如下格式的字符串数据：
+// data:image/png;base64,VE9PTUFOWVNFQ1JFVFM=
+const avatar = joi.string().dataUri().required()
+
+// 验证规则对象 - 更新头像
+exports.update_avatar_schema = {
+  body: {
+    avatar,
   },
 }
