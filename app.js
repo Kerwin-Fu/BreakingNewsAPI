@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-12 16:28:57
- * @LastEditTime: 2020-11-14 16:16:05
+ * @LastEditTime: 2020-11-15 10:17:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \BreakingNewsAPI\app.js
@@ -65,9 +65,11 @@ app.use('/api',userRouter)
 
 // 导入并使用用户信息路由模块
 const userinfoRouter = require('./router/userinfo')
-// 注意：以 /my 开头的接口，都是有权限的接口，需要进行 Token 身份认证
 app.use('/my', userinfoRouter)
         
+// 导入并使用文章分类路由模块
+const artCateRouter = require('./router/artcate')
+app.use('/my/article', artCateRouter)
 
 // 错误中间件
 app.use(function (err, req, res, next) {
