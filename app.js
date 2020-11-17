@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-12 16:28:57
- * @LastEditTime: 2020-11-15 10:17:37
+ * @LastEditTime: 2020-11-17 09:37:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \BreakingNewsAPI\app.js
@@ -70,6 +70,12 @@ app.use('/my', userinfoRouter)
 // 导入并使用文章分类路由模块
 const artCateRouter = require('./router/artcate')
 app.use('/my/article', artCateRouter)
+
+// 导入并使用文章路由模块
+const articleRouter = require('./router/article')
+// 为文章的路由挂载统一的访问前缀 /my/article
+app.use('/my/article', articleRouter)
+
 
 // 错误中间件
 app.use(function (err, req, res, next) {
